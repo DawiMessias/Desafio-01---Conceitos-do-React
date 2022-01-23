@@ -20,13 +20,16 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
     
-    const newTask:Task = {
-      id: Math.floor(Math.random() * 10),
-      title: String(newTaskTitle),
-      isComplete: false
+    if(!newTaskTitle) {
+      alert("Insira um titulo para sua task")
+    } else {
+      const newTask:Task = {
+        id: Math.floor(Math.random() * 10),
+        title: String(newTaskTitle),
+        isComplete: false
+      }
+      setTasks([...tasks, newTask])
     }
-
-    setTasks([...tasks, newTask])
   }
 
   function handleToggleTaskCompletion(id: number) {
@@ -37,12 +40,9 @@ export function TaskList() {
     } : task)
 
     setTasks(isComplete)
-
-    // Como modificar em tela ?
   }
 
   function handleRemoveTask(id: number) {
-    //se verdadeiro remover task pelo id senão task
     const newTask = [...tasks]
     const removeTaskFromId = newTask.filter(task => task.id !== id)
   
